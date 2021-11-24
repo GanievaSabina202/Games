@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game1</title>
+</head>
+
+<body>
+    <h1>The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <p>Wins: <span id="wins">0</span></p>
+    <p>Losses: <span id="losses">0</span></p>
+    <p>Guesses Left: <span id="guesses-left">9</span></p>
+    <p>Your Guesses so far: <span id="guesses-so-far"></span></p>
+
+
+
+
+
+    <script>
+        var words = ["a", "b", "c"];
+        var winsWrapper = document.querySelector("#wins");
+        var lossesWrapper = document.querySelector("#losses");
+        var guessesLeftWrapper = document.querySelector("#guesses-left");
+
+        var foundWord = [];
+        var win = 0;
+        var guessesLeft = 9;
+        var losses = 0;
+        Start = (e) => {
+            var randomWord = words[Math.floor(Math.random() * words.length)];
+            console.log(randomWord);
+            userFind = e.key.toLowerCase()
+            console.log(userFind);
+            if (randomWord === userFind) {
+                win++;
+                winsWrapper.innerHTML = win
+            }
+
+            else {
+                foundWord.push(userFind)
+                var guessesSoFarWrapper = document.querySelector("#guesses-so-far").innerHTML = foundWord.join(", ");
+                guessesLeftWrapper.innerHTML = guessesLeft--
+                x()
+                return
+            }
+        }
+        x = () => {
+            if (guessesLeft === 0) {
+                losses++;
+                lossesWrapper.innerHTML = losses;
+                reset()
+                return
+            }
+
+        }
+        reset = () => {
+            guessesLeft = 9
+        }
+        window.onkeypress = Start;
+    </script>
+</body>
+
+</html>
