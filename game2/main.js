@@ -50,11 +50,17 @@ startGame = (e) => {
     }
     function x() {
         if (guessesLeft === 0) {
-            guessesLeft = 9;
             losses++;
             lossesWrapper.innerHTML = losses;
             return
         }
+        reset()
+    }
+    function reset() {
+        document.getElementById("wrong-guesses").innerHTML = " "
+        var win = 0;
+        var guessesLeft = 9;
+        var losses = 0;
     }
 }
 window.onkeydown = startGame;
