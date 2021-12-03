@@ -1,8 +1,57 @@
-body{
-    background-color: #e3e3e387;
+body {
+    background-color: #000000;
+    color: #FFF;
 }
-.question-paragraph{
-    font-size: 30px;
+
+.question-paragraph {
+    font-size: 75px;
     line-height: 63px;
     font-weight: 600;
+    background: -webkit-linear-gradient(#0067ff, #ffd6f8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 75px;
+}
+
+.progress {
+    background-color: #000000;
+}
+
+.questionVariantWrapper .col-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.questionVariantWrapper .col-6 span {
+    display: block;
+    background: #3184fd;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 13px;
+    width: 90%;
+    margin: 20px 0px;
+    word-break: break-all;
+}
+
+
+.width20 {
+    width: 20%;
+}
+
+.width40 {
+    width: 40%;
+}
+
+.width60 {
+    width: 60%;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.width100 {
+    width: 100%;
 }
