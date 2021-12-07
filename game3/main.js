@@ -4,10 +4,16 @@ var pauseD = document.querySelector("#pause");
 var resetD = document.querySelector("#reset");
 var lapD = document.querySelector("#lap");
 var ulD = document.querySelector("#ul");
+var liD = document.querySelector("#li");
 
-var ms = 0, s = 0, m = 0, time
-
+var ms = 0,
+    s = 0,
+    m = 0,
+    time,
+    arr = []
 class ClockFunc {
+    realTime
+
     startClock() {
         if (!this.time) {
             this.time = setInterval(this.run, 300);
@@ -23,8 +29,9 @@ class ClockFunc {
             this.s = 0;
             this.m++;
         }
-        let result = (this.m < 10 ? "0" + this.m : this.m) + ":" + (this.s < 10 ? "0" + this.s : this.s) + ":" + (this.ms < 10 ? "0" + this.ms : this.ms)
+        var result = (this.m < 10 ? "0" + this.m : this.m) + ":" + (this.s < 10 ? "0" + this.s : this.s) + ":" + (this.ms < 10 ? "0" + this.ms : this.ms)
         clock.innerHTML = result
+        arr.push(result)
         return result
     }
     pause() {
@@ -38,11 +45,11 @@ class ClockFunc {
         time = 0
     }
 
-    lap(){
-        if(this.time){
-            let li = document.createElement("li");
-            li.innerText = result;
-            laps.appendChild(li);
+    lap() {
+        if (this.time) {
+            liD.innerHTML = arr.map((q) => {
+                return `<h5 id="splitWatch">${q}</h5>`
+            }).join("")
         }
     }
 }
