@@ -1,5 +1,6 @@
 *{
     color: #fff;
+    background-size: cover;
 }
 .crystal{
     width: 165px;
@@ -28,4 +29,14 @@ img.ferman{
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     font-size: 20px;
+}
+.targetScore p,
+.yourScore p{
+    background: rgb(98 152 136);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

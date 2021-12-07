@@ -1,60 +1,83 @@
-var startD = document.querySelector("#start");
-var clock = document.querySelector("#clock");
-var pauseD = document.querySelector("#pause");
-var resetD = document.querySelector("#reset");
-var lapD = document.querySelector("#lap");
-var ulD = document.querySelector("#ul");
-var liD = document.querySelector("#li");
-
-var ms = 0,
-    s = 0,
-    m = 0,
-    time,
-    arr = []
-class ClockFunc {
-    realTime
-
-    startClock() {
-        if (!this.time) {
-            this.time = setInterval(this.run, 300);
-        }
-    }
-    run() {
-        this.ms++;
-        if (this.ms == 100) {
-            this.ms = 0;
-            this.s++;
-        }
-        if (this.s == 60) {
-            this.s = 0;
-            this.m++;
-        }
-        var result = (this.m < 10 ? "0" + this.m : this.m) + ":" + (this.s < 10 ? "0" + this.s : this.s) + ":" + (this.ms < 10 ? "0" + this.ms : this.ms)
-        clock.innerHTML = result
-        arr.push(result)
-        return result
-    }
-    pause() {
-        clearInterval(this.time);
-        this.time = false;
-    }
-    reset() {
-        ms = 0
-        s = 0
-        m = 0
-        time = 0
-    }
-
-    lap() {
-        if (this.time) {
-            liD.innerHTML = arr.map((q) => {
-                return `<h5 id="splitWatch">${q}</h5>`
-            }).join("")
-        }
+questionWrapper = {
+    q1: {
+        text: "Question1 ?",
+        answer: ["a", "b", "c", "d"],
+        trueAnswer: "a"
+    },
+    q2: {
+        text: "Question2 ?",
+        answer: ["a", "b", "c", "d"],
+        trueAnswer: "b"
+    },
+    q3: {
+        text: "Question3 ?",
+        answer: ["a", "b", "c", "d"],
+        trueAnswer: "c"
+    },
+    q4: {
+        text: "Question4 ?",
+        answer: ["a", "b", "c", "d"],
+        trueAnswer: "c"
+    },
+    q5: {
+        text: "Question5 ?",
+        answer: ["a", "b", "c", "d"],
+        trueAnswer: "c"
     }
 }
-let StartGame = new ClockFunc()
-startD.addEventListener('click', () => StartGame.startClock())
-pauseD.addEventListener("click", () => StartGame.pause())
-resetD.addEventListener("click", () => StartGame.reset())
-lapD.addEventListener("click", () => StartGame.lap())
+class questionGame {
+    headerQuestion = document.querySelector("#header-question")
+    questionVariantWrapper = document.querySelector(".questionVariantWrapper")
+    winWrapper = document.querySelector("#winWrapper")
+    LoseWrapper = document.querySelector("#LoseWrapper")
+    questions = [];
+    questionIndex = 0;
+    win = 0;
+    lose = 0;
+    uservariant = null
+    constructor(obj) {
+        this.questions = Object.values(obj)
+    }
+    userFindFunc(item) {
+        if ("abc".indexOf(item) === -1) {
+            alert("A B C");
+            return
+        }
+        this.uservariant = item
+        this.nextQuestionFunc()
+    }
+
+    showQuestionFunc() {
+        this.headerQuestion.innerHTML = this.questions[this.questionIndex].text
+        this.questionVariantWrapper.innerHTML = this.questions[this.questionIndex].answer.map((i) => {
+            return `
+            <div class="col-6">
+                <span>${i}</span>
+            </div>`
+        }).join("")
+    }
+
+    nextQuestionFunc() {
+        let TrueAnswer = this.questions[this.questionIndex].trueAnswer
+        if (!this.questions) {
+            alert("Bosdur Bura")
+        }
+        if (TrueAnswer == this.uservariant) {
+            this.winWrapper.innerHTML =
+                `<span id="winWrapper">Xal: ${this.win +=10}</span>`
+        } else {
+            this.LoseWrapper.innerHTML =
+                `<span id="LoseWrapper">Səhv cavablar:  ${this.lose +=1}</span>`
+        }
+        this.questionIndex++
+        this.showQuestionFunc()
+        this.aa()
+    }
+
+
+}
+let StartGame = new questionGame(questionWrapper)
+StartGame.showQuestionFunc()
+window.onkeydown = (event) => {
+    StartGame.userFindFunc(event.key)
+}
