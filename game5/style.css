@@ -1,0 +1,31 @@
+*{
+    color: #fff;
+}
+.crystal{
+    width: 165px;
+}
+.col-12.d-flex.align-items-center.justify-content-evenly.imgWrapper{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+}
+img.ferman{
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.scoreTop{
+    border:  1px solid #3f6661;
+    background: #000;
+    width: 161px;
+    height: 87px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    font-size: 20px;
+}
