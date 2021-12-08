@@ -1,77 +1,89 @@
-var getRandom = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+class Dom {
+    static blue = $('#blueC');
+    static red = $('#redC');
+    static purple = $('#purpleC');
+    static green = $('#greenC');
+    static win = $('#win');
+    static lose = $('#lose');
+}
+
+let currentScore = 0;
+var crystal = {
+    blue:
+    {
+        name: "Blue",
+        value: 0
+    },
+    green:
+    {
+        name: "Green",
+        value: 0
+    },
+    red:
+    {
+        name: "Red",
+        value: 0
+    },
+    purple:
+    {
+        name: "Purple",
+        value: 0
+    }
 };
-var redDom = document.querySelector("#red")
-var purpleDom = document.querySelector("#purple")
-var greenDom = document.querySelector("#green")
-var blueDom = document.querySelector("#blue")
+class Game extends Dom {
+    lossCount = 0;
+    winCount = 0;
+    targetScore = 0;
+    constructor(data) {
+        super(data);
+        this.data = data;
+    }
+    random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-class Crystal {
-    AllCrystal = {
-        blue: {
-            color: "blue",
-            value: 0
-        },
-        red: {
-            color: "red",
-            value: 0
-        },
-        green: {
-            color: "green",
-            value: 0
-        },
-        purple: {
-            color: "purple",
-            value: 0
-        },
-        targetNum:{
-            value:0
+    targetCount = () => {
+        this.targetScore = this.random(19, 150);
+        $("#target-score").text(`${this.targetScore}`);
+    }
+
+   
+    changeValue = () => {
+        currentScore = 0;
+        this.targetCount()
+        $("#your-score").text(`${currentScore}`);
+        this.data.blue.value = this.random(1, 12);
+        this.data.red.value = this.random(1, 12);
+        this.data.green.value = this.random(1, 12);
+        this.data.purple.value = this.random(1, 12);
+        Dom.win.text(`win ${this.winCount}`)
+        Dom.lose.text(`lose ${this.lossCount}`)
+
+    }
+
+    currentCounter = (x) => {
+        if (currentScore === this.targetScore) {
+            alert("winner");
+            this.winCount++;
+            return this.changeValue();
+        }
+
+        else if (currentScore > this.targetScore) {
+            alert('lose')
+            this.lossCount++;
+            return this.changeValue();
+        }
+        else {
+            $("#your-score").text(`${currentScore}`);
+            currentScore += x.value
         }
     }
 }
-
-class Game extends Crystal {
-    win = 0
-    lose = 0
-    NumberWrapper = 0
-    constructor() {
-        super()
-    }
-    setValue() {
-        var NumberWrapper = 0
-        var b = this.AllCrystal.blue.value = getRandom(1, 10)
-        var r = this.AllCrystal.red.value = getRandom(1, 10)
-        var p = this.AllCrystal.purple.value = getRandom(1, 10)
-        var g = this.AllCrystal.green.value = getRandom(1, 10)
-        var t = this.AllCrystal.targetNum.value = getRandom(11, 100);
-        blueDom.addEventListener("click", function () {
-            console.log(
-                StartGame.NumberWrapper += b
-            );
-        })
-        redDom.addEventListener("click", function () {
-            console.log(
-                StartGame.NumberWrapper += r
-
-            );
-        });
-        greenDom.addEventListener("click", function () {
-            console.log(
-                StartGame.NumberWrapper += g
-            );
-        });
-        purpleDom.addEventListener("click", function () {
-            console.log(
-                StartGame.NumberWrapper += p
-            );
-        })
-        console.log(t);
-        if (NumberWrapper == t) {
-            console.log("heheheh");
-        }
-    }
-}
+let g = new Game(crystal);
+g.targetCount();
+g.changeValue();
+$(document).on('click', '#blueC', () => g.currentCounter(crystal.blue))
+$(document).on('click', '#redC', () => g.currentCounter(crystal.red))
+$(document).on('click', '#greenC', () => g.currentCounter(crystal.green))
+$(document).on('click', '#purpleC', () => g.currentCounter(crystal.purple))
 
 
-let StartGame = new Game(getRandom(1, 10), getRandom(1, 10), getRandom(1, 10), getRandom(1, 10), getRandom(11, 100));
-console.log(StartGame.setValue());
+
