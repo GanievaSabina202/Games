@@ -4,6 +4,7 @@
 }
 .crystal{
     width: 165px;
+    cursor: crosshair;
 }
 .col-12.d-flex.align-items-center.justify-content-evenly.imgWrapper{
     position: absolute;
