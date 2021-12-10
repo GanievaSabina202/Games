@@ -10,10 +10,12 @@ var ms = 0,
     s = 0,
     m = 0,
     time,
-    arr = []
+    arr = [],
+    lapArray = [];
 class ClockFunc {
-    realTime
+    lapArrayWrapper=[]
 
+    realTime
     startClock() {
         if (!this.time) {
             this.time = setInterval(this.run, 300);
@@ -38,19 +40,15 @@ class ClockFunc {
         clearInterval(this.time);
         this.time = false;
     }
-    reset() {
-        ms = 0
-        s = 0
-        m = 0
-        time = 0
+    reset = () => {
+        location.reload()
     }
 
     lap() {
-        if (this.time) {
-            liD.innerHTML = arr.map((q) => {
-                return `<h5 id="splitWatch">${q}</h5>`
-            }).join("")
-        }
+        this.lapArrayWrapper.push(arr.pop());
+        liD.innerHTML = this.lapArrayWrapper.map((q) => {
+            return `<h5 id="splitWatch">${q}</h5>`
+        }).join("")
     }
 }
 let StartGame = new ClockFunc()
