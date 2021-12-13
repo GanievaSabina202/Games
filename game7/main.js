@@ -26,7 +26,7 @@ var gamer = {
 var aaa = Object.entries(gamer)
 console.log(aaa[2][1].health);
 
-$(".container").on("click",".btnGamer", function(){
-    var name = $(this).attr("id","he");
-
+$(".container").on("click", ".btnGamer", function () {
+    var name = $(this).val()
+    console.log(name);
 })
